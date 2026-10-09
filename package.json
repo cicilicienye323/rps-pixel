@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "vitest run --maxWorkers=2 --dir src"
+    "test": "vitest run --maxWorkers=2 --dir src",
+    "prebuild": "node -e \"for (const f of ['vision_wasm_internal.js','vision_wasm_internal.wasm']) require('fs').cpSync('node_modules/@mediapipe/tasks-vision/wasm/'+f,'public/mediapipe/wasm/'+f)\"",
+    "predev": "npm run prebuild"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
@@ -15,5 +17,8 @@
     "typescript": "^7.0.2",
     "vite": "^8.3.4",
     "vitest": "^5.0.3"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "1.0.1"
   }
 }

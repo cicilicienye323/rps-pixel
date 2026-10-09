@@ -130,3 +130,5 @@ body {
 .d { color: #7a7090; }
 .tot { font-size: 16px; }
 .barcode { height: 36px; margin-top: 12px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 7px, transparent 7px 9px); }
+.cam [data-video] { position: relative; }
+.cam canvas { position: absolute; inset: 0; transform: scaleX(-1); pointer-events: none; }
