@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="data:," />
+    <!-- The page may only talk to its own origin: this also blocks MediaPipe's usage logger. -->
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self'" />
     <title>RPS Pixel</title>
   </head>
   <body>

@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run --maxWorkers=2 --dir src",
-    "prebuild": "node -e \"for (const f of ['vision_wasm_internal.js','vision_wasm_internal.wasm']) require('fs').cpSync('node_modules/@mediapipe/tasks-vision/wasm/'+f,'public/mediapipe/wasm/'+f)\"",
+    "prebuild": "node -e \"for (const f of ['vision_wasm_internal.js','vision_wasm_internal.wasm','vision_wasm_nosimd_internal.js','vision_wasm_nosimd_internal.wasm']) require('fs').cpSync('node_modules/@mediapipe/tasks-vision/wasm/'+f,'public/mediapipe/wasm/'+f)\"",
     "predev": "npm run prebuild"
   },
   "devDependencies": {
