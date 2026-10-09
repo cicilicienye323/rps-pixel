@@ -9,9 +9,11 @@ export type Reading =
   | { kind: 'nohand' }
 
 const HAND: Record<string, Hand> = { Closed_Fist: 'rock', Open_Palm: 'paper', Victory: 'scissors' }
+// Lowered from 0.80 after a real camera: Open_Palm peaked at 0.72 with a correct pose.
+const LOCK = 0.6
 
 // The most frequent category wins, ties go to the higher average score.
-// Its average score decides: 0.80 and up locks, 0.50 and up asks, below that reads again.
+// Its average score decides: LOCK and up locks, 0.50 and up asks, below that reads again.
 export function readFrames(frames: Frame[]): Reading {
   const groups = new Map<string, number[]>()
   for (const f of frames) {
@@ -25,5 +27,5 @@ export function readFrames(frames: Frame[]): Reading {
   const hand = HAND[key]
   const score = Math.round(avg(scores) * 100) / 100
   if (!hand || score < 0.5) return { kind: 'again' }
-  return { kind: score >= 0.8 ? 'locked' : 'ask', hand, score }
+  return { kind: score >= LOCK ? 'locked' : 'ask', hand, score }
 }
