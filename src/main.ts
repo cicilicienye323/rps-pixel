@@ -22,12 +22,12 @@ function on(label: string, fn: () => void) {
   app.querySelectorAll<HTMLButtonElement>(`[data-act="${label}"]`).forEach(b => b.addEventListener('click', fn, { once: true }))
 }
 
-function hud(): string {
+function hud(round = match.rounds.length + 1): string {
   const s = score(match.rounds)
   const pips = (n: number) => [0, 1, 2].map(i => `<i class="pip${i < n ? ' on' : ''}"></i>`).join('')
   return `<div class="hud" aria-label="Score ${s.you} : ${s.cpu}">
     <div class="side p1"><span class="tag">1P YOU</span><span class="pips">${pips(s.you)}</span></div>
-    <div class="round">R${match.rounds.length + 1}</div>
+    <div class="round">R${round}</div>
     <div class="side p2"><span class="tag">CPU 2P</span><span class="pips">${pips(s.cpu)}</span></div>
   </div>`
 }
@@ -73,7 +73,7 @@ function showResult() {
   const over = isOver(match.rounds)
   const title = r.outcome === 'WIN' ? ptext('YOU WIN', 5) : r.outcome === 'LOSE' ? ptext('YOU LOSE', 5, '#e43b44') : ptext('DRAW', 5, '#b8b0c8')
   const sub = r.outcome === 'WIN' ? VERB[r.you] : r.outcome === 'LOSE' ? VERB[r.cpu] : `Score stays · next is round ${match.rounds.length + 1}`
-  show(`${hud()}
+  show(`${hud(match.rounds.length)}
     <div class="grow"></div>
     <div class="duel">
       <div>${sprite(r.you, 8)}<div class="who">1P YOU</div></div>
